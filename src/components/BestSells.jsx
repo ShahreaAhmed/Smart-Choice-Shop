@@ -5,11 +5,11 @@ export default function BestSells() {
   const monthName = dayjs().format("MMMM");
 
   return (
-    <div className="w-11/12 mx-auto">
+    <div className=" w-11/12 mx-auto">
       <h1 className="text-4xl text-center font-bold">Best Sellers</h1>
       <p className="text-xl text-center font-semibold">Do not miss the current offers until the end of {monthName}</p>
       <div className="mt-10">
-        <div className="grid sm:grid-cols-3 lg:grid-cols-3 md:grid-cols-4 gap-5">
+        <div className="grid sm:grid-cols-3  md:grid-cols-4 gap-5">
           <div className="card bg-base-100 w-full shadow-sm">
             <figure className="bg-[#f7f7f7]">
               <img
