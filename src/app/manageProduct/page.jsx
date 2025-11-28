@@ -10,47 +10,49 @@ export default function PremiumProductTable() {
 
   useEffect(() => {
     async function fetchProducts() {
-      const res = await fetch("http://localhost:5000/products");
+      const res = await fetch(
+        "smart-choice-shop-server-side.vercel.app/products"
+      );
       const result = await res.json();
       setData(result);
     }
     fetchProducts();
   }, []);
 
- 
-const handleDelete = async (id) => {
-  const confirm = await Swal.fire({
-    title: 'Are you sure?',
-    text: "You won't be able to revert this!",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, delete it!'
-  });
+  const handleDelete = async (id) => {
+    const confirm = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
 
-  if (confirm.isConfirmed) {
-    try {
-      const res = await fetch(`http://localhost:5000/products/${id}`, {
-        method: 'DELETE',
-      });
+    if (confirm.isConfirmed) {
+      try {
+        const res = await fetch(
+          `smart-choice-shop-server-side.vercel.app/products/${id}`,
+          {
+            method: "DELETE",
+          }
+        );
 
-      const result = await res.json();
+        const result = await res.json();
 
-      if (result.success) {
-        Swal.fire('Deleted!', 'Product has been deleted.', 'success');
-        setData(data.filter(product => product._id !== id));
-      } else {
-        Swal.fire('Error!', 'Failed to delete product.', 'error');
+        if (result.success) {
+          Swal.fire("Deleted!", "Product has been deleted.", "success");
+          setData(data.filter((product) => product._id !== id));
+        } else {
+          Swal.fire("Error!", "Failed to delete product.", "error");
+        }
+      } catch (error) {
+        console.error(error);
+        Swal.fire("Error!", "Server error.", "error");
       }
-    } catch (error) {
-      console.error(error);
-      Swal.fire('Error!', 'Server error.', 'error');
     }
-  }
-};
-
-
+  };
 
   return (
     <div className="p-6 mt-10 mb-16">
@@ -126,12 +128,15 @@ const handleDelete = async (id) => {
                 <td>{dayjs(product.created_at).format("DD MMM YYYY")}</td>
                 <td className="py-4 px-6 flex justify-center gap-2">
                   <Link href={`/products/${product._id}`}>
-                  <button className="bg-[#010966] text-white px-4 py-2 rounded-lg hover:bg-blue-900 transition">
-                    View
-                  </button>
+                    <button className="bg-[#010966] text-white px-4 py-2 rounded-lg hover:bg-blue-900 transition">
+                      View
+                    </button>
                   </Link>
 
-                  <button onClick={() => handleDelete(product._id)} className="bg-[#f20583]  text-white px-4 py-2 rounded-lg hover:bg-pink-700 transition">
+                  <button
+                    onClick={() => handleDelete(product._id)}
+                    className="bg-[#f20583]  text-white px-4 py-2 rounded-lg hover:bg-pink-700 transition"
+                  >
                     Delete
                   </button>
                 </td>

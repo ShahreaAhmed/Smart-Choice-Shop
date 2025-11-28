@@ -6,9 +6,12 @@ export default async function Page({ params }) {
   const { product_id } = await params;
 
   // API call
-  const res = await fetch(`http://localhost:5000/smart-choice-db/${product_id}`, {
-    cache: "no-store",
-  });
+  const res = await fetch(
+    `smart-choice-shop-server-side.vercel.app/smart-choice-db/${product_id}`,
+    {
+      cache: "no-store",
+    }
+  );
   const data = await res.json();
 
   if (!data.success || !data.result) {
@@ -23,9 +26,10 @@ export default async function Page({ params }) {
 
   return (
     <div className="w-11/12 mx-auto mt-8 py-10 max-w-7xl">
-      <h1 className="text-4xl underline text-center mb-15 font-bold">Product Details</h1>
+      <h1 className="text-4xl underline text-center mb-15 font-bold">
+        Product Details
+      </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 bg-white p-6 rounded-xl shadow-lg">
-
         {/* Product Image */}
         <div className="relative flex justify-center items-center">
           <div className="border rounded-xl overflow-hidden flex justify-center items-center h-[450px] w-full bg-gray-100 shadow-sm">
@@ -39,7 +43,9 @@ export default async function Page({ params }) {
 
         {/* Product Info */}
         <div className="flex flex-col">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3">{product.name}</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3">
+            {product.name}
+          </h1>
 
           {/* Ratings */}
           <div className="flex items-center mb-4">
@@ -102,7 +108,8 @@ export default async function Page({ params }) {
           {/* Extra Info */}
           <div className="grid grid-cols-2 gap-4 text-gray-500 text-sm">
             <div>
-              <span className="font-semibold">Available:</span> {product.available}
+              <span className="font-semibold">Available:</span>{" "}
+              {product.available}
             </div>
             <div>
               <span className="font-semibold">Added on:</span>{" "}

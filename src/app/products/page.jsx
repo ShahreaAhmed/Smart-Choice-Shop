@@ -10,13 +10,14 @@ export default function AllProductPage() {
 
   useEffect(() => {
     async function fetchProducts() {
-      const res = await fetch("http://localhost:5000/products");
+      const res = await fetch(
+        "smart-choice-shop-server-side.vercel.app/products"
+      );
       const data = await res.json();
       setProducts(data);
     }
     fetchProducts();
   }, []);
-
 
   const filteredProducts = products.filter(
     (product) =>
@@ -53,12 +54,10 @@ export default function AllProductPage() {
         </div>
       </div>
 
-      
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {filteredProducts.map((product) => (
           <div key={product._id}>
             <div className="card bg-base-100 w-full shadow-sm h-[430px] flex flex-col hover:shadow-xl transition-shadow duration-300">
-             
               <figure className="bg-[#f7f7f7] w-full h-60 flex items-center justify-center overflow-hidden">
                 <img
                   src={product.photoUrl}
@@ -78,11 +77,8 @@ export default function AllProductPage() {
                 <p className="line-clamp-2">{product.description}</p>
 
                 <div className="card-actions justify-end mt-auto">
-                  
                   <Link href={`/products/${product._id}`}>
-                    <button className="btn">
-                      View Details
-                    </button>
+                    <button className="btn">View Details</button>
                   </Link>
                 </div>
               </div>
@@ -99,4 +95,3 @@ export default function AllProductPage() {
     </div>
   );
 }
-

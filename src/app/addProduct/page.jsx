@@ -26,23 +26,25 @@ export default function Page() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    
     const payload = {
       ...formData,
-      created_at: new Date(formData.created_at).toISOString(), 
+      created_at: new Date(formData.created_at).toISOString(),
       available: Number(formData.available),
       original_price: Number(formData.original_price),
       price: Number(formData.price),
     };
 
     try {
-      const res = await fetch("http://localhost:5000/products", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+      const res = await fetch(
+        "smart-choice-shop-server-side.vercel.app/products",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
 
       const result = await res.json();
 
@@ -74,16 +76,18 @@ export default function Page() {
     <div className="w-11/12 mx-auto bg-white shadow-lg p-6 mt-16 mb-20 rounded-xl">
       <h2 className="text-2xl font-bold mb-4 text-center">Add New Product</h2>
 
-      <form className="grid grid-cols-1 md:grid-cols-2 gap-4" onSubmit={handleSubmit}>
-
+      <form
+        className="grid grid-cols-1 md:grid-cols-2 gap-4"
+        onSubmit={handleSubmit}
+      >
         {/* Name */}
         <div className="flex flex-col">
           <label className="font-semibold">Name</label>
-          <input 
-            type="text" 
+          <input
+            type="text"
             name="name"
-            placeholder="Product Name" 
-            className="input input-bordered w-full" 
+            placeholder="Product Name"
+            className="input input-bordered w-full"
             value={formData.name}
             onChange={handleChange}
             required
@@ -93,13 +97,13 @@ export default function Page() {
         {/* Email */}
         <div className="flex flex-col">
           <label className="font-semibold">Email</label>
-          <input 
-            type="email" 
+          <input
+            type="email"
             name="email"
-            placeholder="Email" 
+            placeholder="Email"
             className="input input-bordered w-full"
             value={formData.email}
-            onChange={handleChange} 
+            onChange={handleChange}
             required
           />
         </div>
@@ -107,9 +111,9 @@ export default function Page() {
         {/* Description */}
         <div className="flex flex-col md:col-span-2">
           <label className="font-semibold">Description</label>
-          <textarea 
+          <textarea
             name="description"
-            placeholder="Product Description" 
+            placeholder="Product Description"
             className="textarea textarea-bordered w-full"
             value={formData.description}
             onChange={handleChange}
@@ -120,13 +124,13 @@ export default function Page() {
         {/* Photo URL */}
         <div className="flex flex-col">
           <label className="font-semibold">Photo URL</label>
-          <input 
-            type="text" 
+          <input
+            type="text"
             name="photoUrl"
-            placeholder="Image URL" 
+            placeholder="Image URL"
             className="input input-bordered w-full"
             value={formData.photoUrl}
-            onChange={handleChange} 
+            onChange={handleChange}
             required
           />
         </div>
@@ -134,8 +138,8 @@ export default function Page() {
         {/* Date */}
         <div className="flex flex-col">
           <label className="font-semibold">Date</label>
-          <input 
-            type="date" 
+          <input
+            type="date"
             name="created_at"
             className="input input-bordered w-full"
             value={formData.created_at}
@@ -147,13 +151,13 @@ export default function Page() {
         {/* Available */}
         <div className="flex flex-col">
           <label className="font-semibold">Available (Quantity)</label>
-          <input 
-            type="number" 
+          <input
+            type="number"
             name="available"
-            placeholder="Total Available" 
+            placeholder="Total Available"
             className="input input-bordered w-full"
             value={formData.available}
-            onChange={handleChange} 
+            onChange={handleChange}
             min={0}
             required
           />
@@ -178,13 +182,13 @@ export default function Page() {
         {/* Original Price */}
         <div className="flex flex-col">
           <label className="font-semibold">Original Price</label>
-          <input 
-            type="number" 
+          <input
+            type="number"
             name="original_price"
-            placeholder="Original Price" 
+            placeholder="Original Price"
             className="input input-bordered w-full"
             value={formData.original_price}
-            onChange={handleChange} 
+            onChange={handleChange}
             min={0}
             required
           />
@@ -193,23 +197,23 @@ export default function Page() {
         {/* Current Price */}
         <div className="flex flex-col">
           <label className="font-semibold">Discount Price</label>
-          <input 
-            type="number" 
+          <input
+            type="number"
             name="price"
-            placeholder="Sale Price" 
+            placeholder="Sale Price"
             className="input input-bordered w-full"
             value={formData.price}
-            onChange={handleChange} 
+            onChange={handleChange}
             min={0}
-            
           />
         </div>
 
         {/* Submit Button */}
         <div className="md:col-span-2">
-          <button type="submit" className="btn btn-primary w-full">Add Product</button>
+          <button type="submit" className="btn btn-primary w-full">
+            Add Product
+          </button>
         </div>
-
       </form>
     </div>
   );
